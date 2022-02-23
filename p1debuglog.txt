@@ -1,1 +1,81 @@
+ gcc -g p1original.c; ./a.out
+/tmp/cckB8Ho6.o: In function `find_distance':
+/home/runner/Test2Session2/p1original.c:14: undefined reference to `pow'
+/home/runner/Test2Session2/p1original.c:14: undefined reference to `pow'
+/home/runner/Test2Session2/p1original.c:14: undefined reference to `sqrt'
+collect2: error: ld returned 1 exit status
+sh: 1: ./a.out: not found
+exit status 127
+ gcc -g p1original.c -lm
+ a.out
+bash: a.out: command not found
+ ./a.out
+enter the value of x1 and y1:
+1 1
+enter the value of x2 and y2:
+2   2
+the distance between two points is 1.414214 
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0x93b: file p1original.c, line 25.
+(gdb) r
+Starting program: /home/runner/Test2Session2/a.out 
+warning: Error disabling address space randomization: Operation not permitted
 
+Breakpoint 1, main () at p1original.c:25
+25  {
+(gdb) n
+27    input(&x1,&y1,&x2,&y2);
+(gdb) s
+input (x1=0x7fffab3036f4, y1=0x7fffab3036f8, x2=0x7fffab3036fc, 
+    y2=0x7fffab303700) at p1original.c:6
+6     printf("enter the value of x1 and y1:\n");
+(gdb) n
+enter the value of x1 and y1:
+7     scanf("%f %f",x1,y1);
+(gdb) n
+        1   1
+8     printf("enter the value of x2 and y2:\n");
+(gdb) n
+enter the value of x2 and y2:
+9     scanf("%f %f",x2,y2);
+(gdb) n
+        2   2
+11  }
+(gdb) n
+main () at p1original.c:28
+28    find_distance(x1,y1,x2,y2,&dist);
+(gdb) s
+find_distance (x1=1, y1=1, x2=2, y2=2, dist=0x7fffab303704) at p1original.c:14
+14    *dist=sqrt(pow((x2-x1),2)+pow((y2-y1),2));
+(gdb) n
+17  }
+(gdb) n
+main () at p1original.c:29
+29    output(x1,y1,x2,y2,dist);
+(gdb) s
+output (x1=1, y1=1, x2=2, y2=2, dist=1.41421354) at p1original.c:21
+21    printf("the distance between two points is %f",dist);
+(gdb) n
+23  }
+(gdb) n
+main () at p1original.c:30
+30  }(gdb) c
+Continuing.
+the distance between two points is 1.414214[Inferior 1 (process 1348) exited normally]
+(gdb) 
