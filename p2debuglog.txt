@@ -1,1 +1,91 @@
+ gcc -g p2original.c; ./a.out
+enter the value of x1 and y1:
+1 2
+enter the value of x2 and y2:
+1 1
+enter the value of x3 and y1:
+2 3
+three points forms the triangle 
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0x8f0: file p2original.c, line 42.
+(gdb) r
+Starting program: /home/runner/Test2Session2/a.out 
+warning: Error disabling address space randomization: Operation not permitted
 
+Breakpoint 1, main () at p2original.c:42
+42  {
+(gdb) n
+45        input_triangle(&x1,&y1,&x2,&y2,&x3,&y3);
+(gdb) s
+input_triangle (x1=0x7ffe55351ebc, y1=0x7ffe55351ec0, x2=0x7ffe55351ec4, 
+    y2=0x7ffe55351ec8, x3=0x7ffe55351ecc, y3=0x7ffe55351ed0) at p2original.c:4
+4       printf("enter the value of x1 and y1:\n");
+(gdb) n
+enter the value of x1 and y1:
+5       scanf("%f %f",x1,y1);
+(gdb) n
+        1   2
+6       printf("enter the value of x2 and y2:\n");
+(gdb) n
+enter the value of x2 and y2:
+7       scanf("%f %f",x2,y2);
+(gdb) n
+    2 3
+8       printf("enter the value of x3 and y1:\n");
+(gdb) n
+enter the value of x3 and y1:
+9       scanf("%f %f",x3,y3);
+(gdb) n
+        1   1
+10  }
+(gdb) n
+main () at p2original.c:46
+46        chktr=is_triangle(x1,y1,x2,y2,x3,y3);
+(gdb) s
+is_triangle (x1=1, y1=2, x2=2, y2=3, x3=1, y3=1) at p2original.c:14
+14      area=0.5*(x1 * (y2 - y3)
+(gdb) n
+15              + x2 * (y3 - y1)
+(gdb) n
+16              + x3 * (y1 - y2));
+(gdb) n
+14      area=0.5*(x1 * (y2 - y3)
+(gdb) n
+17      if (area==0)
+(gdb) n
+22          return 1;
+(gdb) n
+24  }
+(gdb) n
+main () at p2original.c:47
+47        output(x1,y1,x2,y2,x3,y3,chktr);
+(gdb) s
+output (x1=1, y1=2, x2=2, y2=3, x3=1, y3=1, istriangle=1) at p2original.c:27
+27      if (istriangle==1)
+(gdb) n
+29          printf("three points forms the triangle");
+(gdb) n
+38  }
+(gdb) n
+main () at p2original.c:50
+50  return 0;
+(gdb) c
+Continuing.
+three points forms the triangle[Inferior 1 (process 1855) exited normally]
+(gdb) 
